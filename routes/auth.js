@@ -5,7 +5,7 @@ import { verifyToken } from '../verifyToken.js';
 
 const router = express.Router();
 // create user
-router.post('/signup',verifyToken, signup);
+router.post('/signup', signup);
 // sign in
 router.post('/signin',verifyToken, signin);
 //google auth
