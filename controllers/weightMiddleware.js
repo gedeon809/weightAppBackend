@@ -5,7 +5,7 @@ export const addWeight = async (req, res, next) => {
   const newWeight = new Weight({ userId: req.user.id, ...req.body });
   try {
     const savedWeight = await newWeight.save();
-    res.status(200).json(savedWeight);
+    res.status(200).send({ message: 'New Weight entry added successfully.' });
   } catch (err) {
     next(err);
   }
