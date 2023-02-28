@@ -10,7 +10,7 @@ router.get("/getWeight", getWeight);
 //delete weight
 router.delete("/:id", deleteWeight);
 //update weight
-router.put("/:id", verifyToken, updateWeight);
+router.put("/:id", updateWeight);
 
 export default router;
 
