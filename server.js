@@ -1,12 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import weightRoutes from "./routes/weight.js";
 import authRoutes from "./routes/auth.js";
 
 
 const app = express();
+
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 // connect to my MongoDB server
@@ -25,6 +27,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 //middleware
+app.use(cors());
 app.use(cookieParser())
 //allowing the app to take a json file from outside
 app.use(express.json());
