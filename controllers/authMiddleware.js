@@ -4,15 +4,15 @@ import bcrypt from "bcryptjs";
 import { createError } from "../error.js";
 import jwt from "jsonwebtoken";
 
-export const signup = async (req, res, next) => {
+export const sign_up = async (req, res, next) => {
 
     try {    
-        let { username, email, password, confirmPassword } = req.body;
-        username = username.trim();
+        let { userName, email, password, confirmPassword } = req.body;
+        userName = userName.trim();
         email = email.trim();
         password = password.trim();
         confirmPassword = confirmPassword.trim();
-        if (username == '' || email == '' || password == '' || confirmPassword == '') {
+        if (userName == '' || email == '' || password == '' || confirmPassword == '') {
             res.json({
               status: 'FAILED',
               message: 'empty input fields',
@@ -22,10 +22,10 @@ export const signup = async (req, res, next) => {
               status: 'FAILED',
               message: 'passwords do not match',
             });
-          } else if (!/^[a-zA-Z ]*$/.test(username)) {
+          } else if (!/^[a-zA-Z ]*$/.test(userName)) {
             res.json({
               status: 'FAILED',
-              message: 'invalid username entered',
+              message: 'invalid userName entered',
             });
           } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
             res.json({
@@ -42,7 +42,7 @@ export const signup = async (req, res, next) => {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(req.body.password, salt);
       //using spread operator to take every properties
-      const newUser = new User({ username,email, password: hash });
+      const newUser = new User({ userName,email, password: hash });
       //saving a new details in mongoDB
       await newUser.save();
       res.status(200).send('user has been created');
@@ -51,7 +51,7 @@ export const signup = async (req, res, next) => {
     }
   };
 
-export const signin = async (req, res, next) => {
+export const login = async (req, res, next) => {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) return next(createError(404, 'User not found'));
@@ -102,7 +102,7 @@ export const signin = async (req, res, next) => {
     }
   };
 
-  export const signout = (req, res, next) => {
+  export const sign_out = (req, res, next) => {
     res.clearCookie('access_token');
     res.status(200).send('user has been signed out');
   };

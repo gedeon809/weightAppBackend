@@ -1,7 +1,7 @@
 import Weight from "../models/Weight.js";
 import { createError } from "../error.js";
 // create a new Weight
-export const addWeight = async (req, res, next) => {
+export const save_weight = async (req, res, next) => {
   const newWeight = new Weight({ userId: req.user.id, ...req.body });
   try {
     const savedWeight = await newWeight.save();
@@ -11,7 +11,7 @@ export const addWeight = async (req, res, next) => {
   }
 };
 // update a weight by ID
-export const updateWeight = async (req, res, next) => {
+export const update_weight = async (req, res, next) => {
   try {
     const weight = await Weight.findById(req.params.id);
     if (!weight) return next(createError(404, "Weight not found!"));
@@ -32,7 +32,7 @@ export const updateWeight = async (req, res, next) => {
   }
 };
 // delete a weight by its ID
-export const deleteWeight = async (req, res, next) => {
+export const delete_weight = async (req, res, next) => {
   try {
     const weight = await Weight.findById(req.params.id);
     if (!weight) return next(createError(404, "Weight not found!"));
@@ -47,7 +47,7 @@ export const deleteWeight = async (req, res, next) => {
   }
 };
 // Get the weights
-export const getWeight = async (req, res, next) => {
+export const get_weight_history = async (req, res, next) => {
   try {
     const weights = await Weight.find();
     res.status(200).json(weights);

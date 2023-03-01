@@ -1,16 +1,16 @@
 import express from "express";
-import { addWeight, getWeight, deleteWeight, updateWeight } from "../controllers/weightMiddleware.js";
+import { save_weight, get_weight_history, delete_weight, update_weight } from "../controllers/weightMiddleware.js";
 import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
 //create weight
-router.post("/addWeight", addWeight);
+router.post("/save_weight", save_weight);
 //get weight
-router.get("/getWeight", getWeight);
+router.get("/get_weight_history", get_weight_history);
 //delete weight
-router.delete("/:id", deleteWeight);
+router.delete("/:id", delete_weight);
 //update weight
-router.put("/:id", updateWeight);
+router.put("/:id", update_weight);
 
 export default router;
 
